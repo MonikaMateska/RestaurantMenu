@@ -11,13 +11,21 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var foodButton: UIButton!
     @IBOutlet weak var beverageButton: UIButton!
+    @IBOutlet weak var winePairingButton: UIButton!
+    
+    private struct Constants {
+        static let userStoryCommentsKey = "userStoryComments"
+    }
     
     private var selectedItemType: ItemType = .food
     private var storage = UserDefaultsStorage()
+    private var winePairingApi = WinePairingAPI()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        foodButton.layer.cornerRadius = 5
+        beverageButton.layer.cornerRadius = 5
+        winePairingButton.layer.cornerRadius = 5
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +36,10 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let secondVC = segue.destination as? SecondViewController {
             secondVC.itemsType = selectedItemType
+            secondVC.storage = storage
+        } else if let secondVC = segue.destination as? WinePairingViewController {
+            secondVC.winePairingApi = winePairingApi
+        } else if let secondVC = segue.destination as? UserStoryViewController {
             secondVC.storage = storage
         }
     }

@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+protocol LocalStorage {
+    
+    func save(value: Any?, forKey key: String)
+    
+    func value(forKey key: String) -> Any?
+    
+    func bool(forKey key: String) -> Bool
+    
+    func clearData()
+    
+}

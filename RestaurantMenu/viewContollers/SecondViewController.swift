@@ -14,13 +14,13 @@ class SecondViewController: UIViewController {
     var itemsType: ItemType = .food
     var storage: LocalStorage? = nil
     
-    private var items = [RestaurantItem]()
+    private var items = [TableCell]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = itemsType == .food ? "Food" : "Beverage"
         
-        items = RestaurantItem.createItems().filter { $0.type == itemsType }
+        items = TableCell.createItems().filter { $0.type == itemsType }
         
         tableView.delegate = self
         tableView.dataSource = self
